@@ -6,7 +6,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <span class="mx-5">
-        <v-img src="../assets/Eliga Accelerator LOGO (Final Version).png" max-height="50" max-width="50"></v-img>
+        <v-img src="../assets/EligaLogo.png" max-height="50" max-width="50"></v-img>
       </span>
       <v-btn flat color="grey">
         <span>Sign Out</span>
