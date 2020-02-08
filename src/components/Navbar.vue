@@ -5,13 +5,9 @@
         <span class="font-weight-light">Eliga Accelerator</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <span class="mx-5">
+      <span>
         <v-img src="../assets/EligaLogo.png" max-height="50" max-width="50"></v-img>
       </span>
-      <v-btn flat color="grey">
-        <span>Sign Out</span>
-        <v-icon right>mdi-exit-to-app</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer app class="black">
@@ -24,7 +20,20 @@
             <v-list-item-title>{{ link.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+          
+      
       </v-list>
+      <!-- Not sure about how to move the signout btn to the bottom -->
+        <v-container>
+          <v-row align="end" justify="center">
+            <v-btn flat color="red darken-4">
+              <span>Sign Out</span>
+              <v-icon right>mdi-exit-to-app</v-icon>
+            </v-btn>
+          </v-row>
+        </v-container>
+      
     </v-navigation-drawer>
 
   </nav>
