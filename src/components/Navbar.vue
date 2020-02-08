@@ -15,6 +15,16 @@
     </v-app-bar>
 
     <v-navigation-drawer app class="black">
+      <v-layout column align-center>
+        <v-flex class="mt-5">
+          <v-avatar size="100">
+            <img src="/IronMan.png" alt="">
+          </v-avatar>
+          <p class="white--text subheading mt-1">
+            Kevin Wu
+          </p>
+        </v-flex>
+      </v-layout>
       <v-list>
         <v-list-item v-for="link in links" :key='link.text' router :to="link.route">
           <v-list-item-icon>
