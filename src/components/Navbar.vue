@@ -1,6 +1,7 @@
 <template>
   <nav>
     <v-app-bar flat class="primary">
+      <v-app-bar-nav-icon class="font-weight-light" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="secondary--text headline">
         <span class="font-weight-light">Eliga Accelerator</span>
       </v-toolbar-title>
@@ -54,6 +55,7 @@
 export default {
   data() {
     return {
+      drawer: true,
       links: [
         { icon: 'mdi-speedometer', text: 'Dashboard', route: '/'},
         { icon: 'mdi-checkbox-multiple-blank', text: 'Product Backlog', route: '/productbacklog'},
