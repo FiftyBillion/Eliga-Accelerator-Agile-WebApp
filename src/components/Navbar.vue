@@ -6,6 +6,27 @@
         <span class="font-weight-light">Eliga Accelerator</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+
+      <!-- dropdown menu -->
+      <v-menu offset-y>
+           <template v-slot:activator="{ on }">
+              <v-btn text v-on="on" class="font-weight-light">
+                <v-icon left>mdi-chevron-down</v-icon>
+                <span>Menu</span>
+              </v-btn>
+           </template>
+          <v-list>
+            <v-list-item
+                v-for="(link,idx) in links"
+                :key="idx"
+                :to="link.route"
+            >
+             <v-list-item-title>{{ link.text }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+      </v-menu>
+
+
       <span>
         <v-img src="../assets/EligaLogo.png" max-height="50" max-width="50"></v-img>
       </span>
