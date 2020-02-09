@@ -11,6 +11,17 @@
     </v-app-bar>
 
     <v-navigation-drawer app class="black">
+      <v-container>
+        <v-row>
+          <v-col class="mx-5">
+            <v-avatar>
+              <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDOaXs_L_jjci3OGgZO7qF3q6NgRR8gRwcRVw1qsJR7NtRIJ-c"></v-img>
+            </v-avatar>
+            <span class="ml-5">Iron Man</span>
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-divider></v-divider>
       <v-list>
         <v-list-item v-for="link in links" :key='link.text' router :to="link.route">
           <v-list-item-icon>
@@ -24,16 +35,16 @@
           
       
       </v-list>
-      <!-- Not sure about how to move the signout btn to the bottom -->
-        <v-container>
-          <v-row align="end" justify="center">
-            <v-btn flat color="red darken-4">
-              <span>Sign Out</span>
-              <v-icon right>mdi-exit-to-app</v-icon>
-            </v-btn>
-          </v-row>
-        </v-container>
       
+      <template v-slot:append>
+        <div class="pa-10">
+          <v-btn block color="red darken-4">
+            <span>Sign Out</span>
+            <v-icon right>mdi-exit-to-app</v-icon>
+          </v-btn>
+        </div>
+      </template>
+        
     </v-navigation-drawer>
 
   </nav>
