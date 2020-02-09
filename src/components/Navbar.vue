@@ -11,7 +11,7 @@
       </span>
     </v-app-bar>
 
-    <v-navigation-drawer app class="black">
+    <v-navigation-drawer v-model="drawer" app class="black">
       <v-container>
         <v-row>
           <v-col class="mx-5">
