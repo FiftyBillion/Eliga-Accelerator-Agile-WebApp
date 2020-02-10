@@ -40,8 +40,12 @@
               <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDOaXs_L_jjci3OGgZO7qF3q6NgRR8gRwcRVw1qsJR7NtRIJ-c"></v-img>
             </v-avatar>
             <span class="ml-5">Iron Man</span>
+              <v-col class="mt-4 mb-3"> 
+             <Popup />
+          </v-col> 
           </v-col>
         </v-row>
+
       </v-container>
       <v-divider></v-divider>
       <v-list>
@@ -73,19 +77,22 @@
 </template>
 
 <script>
+
+import Popup from './Popup.vue'
 export default {
-  data() {
-    return {
-      drawer: true,
-      links: [
-        { icon: 'mdi-speedometer', text: 'Dashboard', route: '/'},
-        { icon: 'mdi-checkbox-multiple-blank', text: 'Product Backlog', route: '/productbacklog'},
-        { icon: 'mdi-run', text: 'Sprint Backlog', route: '/sprintbacklog'},
-        { icon: 'mdi-chart-bar', text: 'Burndown Chart', route: '/burndownchart'},
-        { icon: 'mdi-view-list', text: 'Tasks', route: '/tasks'},
-        { icon: 'mdi-account-multiple', text: 'People', route: '/people'}
-      ]
-    }
+ components: { Popup},
+   data() {
+     return {
+       drawer: true,
+       links: [
+         { icon: 'mdi-speedometer', text: 'Dashboard', route: '/'},
+         { icon: 'mdi-checkbox-multiple-blank', text: 'Product Backlog', route: '/productbacklog'},
+         { icon: 'mdi-run', text: 'Sprint Backlog', route: '/sprintbacklog'},
+         { icon: 'mdi-chart-bar', text: 'Burndown Chart', route: '/burndownchart'},
+         { icon: 'mdi-view-list', text: 'Tasks', route: '/tasks'},
+         { icon: 'mdi-account-multiple', text: 'People', route: '/people'}
+       ]
+     }
   },
 }
 </script>

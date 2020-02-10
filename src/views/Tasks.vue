@@ -13,8 +13,10 @@
           <v-icon small left>mdi-account</v-icon>
           <span class="caption text-lowercase">By Person</span>
         </v-btn>
-         
       </v-row>
+        <v-col class="mt-4 mb-3"> 
+             <Popup />
+        </v-col> 
 
         <v-card flat v-for="project in projects" :key="project.title">
         <v-row wrap :class="`pa-3 project ${project.status}`">
@@ -49,6 +51,7 @@
 // @ is an alias to /src
 
 export default {
+  
   name: 'tasks',
   data () {
     return {
