@@ -78,9 +78,10 @@
 
 <script>
 
-import Popup from './Popup.vue'
+import Popup from './Popup'
 export default {
- components: { Popup},
+  components: { Popup },
+ 
    data() {
      return {
        drawer: true,
