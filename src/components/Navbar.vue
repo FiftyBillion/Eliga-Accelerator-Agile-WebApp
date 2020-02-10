@@ -41,7 +41,7 @@
             </v-avatar>
             <span class="ml-5">Iron Man</span>
               <v-col class="mt-4 mb-3"> 
-             <Popup />
+             <TKPopup />
           </v-col> 
           </v-col>
         </v-row>
@@ -78,9 +78,9 @@
 
 <script>
 
-import Popup from './Popup'
+import TKPopup from './TKPopup'
 export default {
-  components: { Popup },
+  components: { TKPopup },
  
    data() {
      return {
