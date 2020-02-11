@@ -13,8 +13,8 @@
           <v-icon small left>mdi-account</v-icon>
           <span class="caption text-lowercase">By Person</span>
         </v-btn>
-         
       </v-row>
+        
 
         <v-card flat v-for="project in projects" :key="project.title">
         <v-row wrap :class="`pa-3 project ${project.status}`">
@@ -49,13 +49,14 @@
 // @ is an alias to /src
 
 export default {
+  
   name: 'tasks',
   data () {
     return {
       projects: [
         { title: 'Design a new website', person: 'Ki Tae Park', due: '17th Mar 2020', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
         { title: 'Code up the homepage', person: 'Kevin Wu', due: '17th Mar 2020', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Code up the homepage', person: 'Rasapon Pinyapap', due: '17th Mar 20208', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
+        { title: 'Code up the homepage', person: 'Rasapon Pinyapap', due: '17th Mar 2020', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
         { title: 'Create a database', person: 'Daniel Cheng', due: '17th Mar 2020', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
       ]
     }
