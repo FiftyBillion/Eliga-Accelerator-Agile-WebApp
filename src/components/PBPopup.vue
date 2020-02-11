@@ -30,14 +30,15 @@
                   chips
                   rounded
                   item-color="secondary"
+                  v-model="priority"
                 ></v-overflow-btn>
               </v-col>
               <v-col cols="3" align-self="center">
-                <v-text-field label="Hours" color="accent" suffix="hr"></v-text-field>
+                <v-text-field label="Hours" color="accent" suffix="hr" v-model="hour"></v-text-field>
               </v-col>
             </v-row>
             <div class="text-right">
-              <v-btn class="primary">Submit</v-btn>
+              <v-btn class="primary" @click="addBacklog">Submit</v-btn>
             </div>
           </v-form>
         </v-card-text>
@@ -47,13 +48,27 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
       dialog: false,
-      content: "",
-      dropdown_priority: ["High", "Mid", "Low"]
-    };
+      content: '',
+      priority: '',
+      hour: '',
+      dropdown_priority: ["High", "Mid", "Low"],
+    }
+  },
+  methods: {
+      ...mapActions(['addPB']),
+      addBacklog() {
+          var pb = {content: this.content, priority: this.priority, hour:this.hour}
+          this.addPB(pb)
+          this.dialog = false
+          this.content = ''
+          this.priority = ''
+          this.hour = ''
+      }
   }
 };
 </script>
