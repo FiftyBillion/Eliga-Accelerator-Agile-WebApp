@@ -17,7 +17,7 @@
                         <template v-slot:activator ="{ on }" >
                             <v-text-field :value="formattedDate" label="Due date" prepend-icon="mdi-calendar-range" v-on="on"></v-text-field>
                         </template>
-                        <v-date-picker v-model="due"></v-date-picker>
+                        <v-date-picker v-model="formattedDate"></v-date-picker>
                     </v-menu>
 
 
