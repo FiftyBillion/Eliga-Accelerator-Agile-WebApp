@@ -68,10 +68,10 @@ export default {
     PBPopup
   },
   computed: {
-    ...mapState(['PBitems'])
+    ...mapState('ProductBacklog', ['PBitems'])
   },
   methods: {
-    ...mapActions(['removePB']),
+    ...mapActions('ProductBacklog', ['removePB']),
     removeBacklog(pb) {
       this.removePB(pb)
     }
