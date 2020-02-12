@@ -60,7 +60,7 @@ export default {
     }
   },
   methods: {
-      ...mapActions(['addPB']),
+      ...mapActions('ProductBacklog', ['addPB']),
       addBacklog() {
           var pb = {content: this.content, priority: this.priority, hour:this.hour}
           this.addPB(pb)
