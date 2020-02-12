@@ -40,9 +40,6 @@
               <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDOaXs_L_jjci3OGgZO7qF3q6NgRR8gRwcRVw1qsJR7NtRIJ-c"></v-img>
             </v-avatar>
             <span class="ml-5">Iron Man</span>
-              <v-col class="mt-4 mb-3"> 
-             <TKPopup />
-          </v-col> 
           </v-col>
         </v-row>
 
@@ -78,9 +75,7 @@
 
 <script>
 
-import TKPopup from './TKPopup'
 export default {
-  components: { TKPopup },
  
    data() {
      return {

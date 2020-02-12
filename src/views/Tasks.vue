@@ -5,18 +5,21 @@
 
         <v-row justify-start class="mb-3">
          
-         <v-btn small flat color="grey" @click="sortBy('title')">
+         <v-btn small flat color="accent" @click="sortBy('title')">
           <v-icon small left>mdi-folder</v-icon>
           <span class="caption text-lowercase">By project name</span>
         </v-btn>
-        <v-btn small flat color="grey" @click="sortBy('person')">
+        <v-btn small flat color="accent" @click="sortBy('person')">
           <v-icon small left>mdi-account</v-icon>
           <span class="caption text-lowercase">By Person</span>
         </v-btn>
       </v-row>
-        
+      
+        <v-col class="mt-4 mb-3"> 
+             <TKPopup />
+        </v-col> 
 
-        <v-card flat v-for="project in projects" :key="project.title">
+        <v-card outlined v-for="project in projects" :key="project.title">
         <v-row wrap :class="`pa-3 project ${project.status}`">
           <v-col xs="12" md="6">
             <div class="grey--text">Project title</div>
@@ -47,9 +50,10 @@
 
 <script>
 // @ is an alias to /src
+import TKPopup from '@/components/TKPopup.vue'
 
 export default {
-  
+  components: { TKPopup },
   name: 'tasks',
   data () {
     return {

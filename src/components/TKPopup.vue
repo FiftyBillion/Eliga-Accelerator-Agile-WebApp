@@ -3,10 +3,10 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
-        <v-btn class="success" dark v-on="on">Add New Project</v-btn>
+        <v-btn class="accent" dark v-on="on">Add New Project</v-btn>
       </template>
       <v-card>
-        <v-card-title class="headline grey lighten-2" primary-title>Add a New Project</v-card-title>
+        <v-card-title class="headline accent lighten-2" primary-title>Add a New Project</v-card-title>
            <v-card-text>
              <v-form class="px-3" ref="form">
                <v-text-field v-model="title" label="Title" prepend-icon="mdi-folder" :rules="inputRules"></v-text-field>
@@ -21,7 +21,7 @@
                     </v-menu>
 
 
-               <v-btn flat @click="submit" class="success mx-0 mt-3">Add Project</v-btn>
+               <v-btn flat @click="submit" class="primary mx-0 mt-3">Add Project</v-btn>
              </v-form>
        </v-card-text>
       </v-card>
