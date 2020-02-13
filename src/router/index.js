@@ -6,6 +6,9 @@ import SprintBacklog from '../views/SprintBacklog'
 import BurndownChart from '../views/BurndownChart'
 import Tasks from '../views/Tasks'
 import People from '../views/People'
+import PBtoSB from '../components/PBtoSB'
+import SBtoSprint from '../components/SBtoSprint'
+import Sprint from '../components/Sprint'
 
 Vue.use(VueRouter)
 
@@ -21,13 +24,33 @@ const routes = [
     component: ProductBacklog
   },
   {
-    path: '/sprintBacklog',
-    name: 'sprintBacklog',
-    component: SprintBacklog
+    path: '/sprintbacklog',
+    name: 'sprintbacklog',
+    component: SprintBacklog,
+    children: [
+    {
+      path: '',
+      component: PBtoSB
+    },
+    {
+      path: 'pbtosb',
+      name: 'pbtosb',
+      component: PBtoSB
+    },
+    {
+      path: 'sbtosprint',
+      name: 'sbtosprint',
+      component: SBtoSprint
+    },
+    {
+      path: 'sprint',
+      name: 'sprint',
+      component: Sprint
+    }]
   },
   {
-    path: '/burndownChart',
-    name: 'burndownChart',
+    path: '/burndownchart',
+    name: 'burndownchart',
     component: BurndownChart
   },
   {
