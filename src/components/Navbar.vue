@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-app-bar flat class="primary">
+    <v-app-bar app flat class="primary">
       <v-app-bar-nav-icon class="font-weight-light" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="secondary--text headline">
         <span class="font-weight-light">Eliga Accelerator</span>
@@ -9,23 +9,18 @@
 
       <!-- dropdown menu -->
       <v-menu offset-y>
-           <template v-slot:activator="{ on }">
-              <v-btn text v-on="on" class="font-weight-light">
-                <v-icon left>mdi-chevron-down</v-icon>
-                <span>Menu</span>
-              </v-btn>
-           </template>
-          <v-list>
-            <v-list-item
-                v-for="(link,idx) in links"
-                :key="idx"
-                :to="link.route"
-            >
-             <v-list-item-title>{{ link.text }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on" class="font-weight-light">
+            <v-icon left>mdi-chevron-down</v-icon>
+            <span>Menu</span>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="(link,idx) in links" :key="idx" :to="link.route">
+            <v-list-item-title>{{ link.text }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
       </v-menu>
-
 
       <span>
         <v-img src="../assets/EligaLogo.png" max-height="50" max-width="50"></v-img>
@@ -37,16 +32,17 @@
         <v-row>
           <v-col class="mx-5">
             <v-avatar>
-              <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDOaXs_L_jjci3OGgZO7qF3q6NgRR8gRwcRVw1qsJR7NtRIJ-c"></v-img>
+              <v-img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDOaXs_L_jjci3OGgZO7qF3q6NgRR8gRwcRVw1qsJR7NtRIJ-c"
+              ></v-img>
             </v-avatar>
             <span class="ml-5">Iron Man</span>
           </v-col>
         </v-row>
-
       </v-container>
       <v-divider></v-divider>
       <v-list>
-        <v-list-item v-for="link in links" :key='link.text' router :to="link.route">
+        <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-item-icon>
             <v-icon>{{ link.icon }}</v-icon>
           </v-list-item-icon>
@@ -54,11 +50,8 @@
             <v-list-item-title>{{ link.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-          
-      
       </v-list>
-      
+
       <template v-slot:append>
         <div class="pa-10">
           <v-btn block color="red darken-4">
@@ -67,28 +60,32 @@
           </v-btn>
         </div>
       </template>
-        
     </v-navigation-drawer>
-
   </nav>
 </template>
 
 <script>
-
 export default {
- 
-   data() {
-     return {
-       drawer: true,
-       links: [
-         { icon: 'mdi-speedometer', text: 'Dashboard', route: '/'},
-         { icon: 'mdi-checkbox-multiple-blank', text: 'Product Backlog', route: '/productbacklog'},
-         { icon: 'mdi-run', text: 'Sprint Backlog', route: '/sprintbacklog'},
-         { icon: 'mdi-chart-bar', text: 'Burndown Chart', route: '/burndownchart'},
-         { icon: 'mdi-view-list', text: 'Tasks', route: '/tasks'},
-         { icon: 'mdi-account-multiple', text: 'People', route: '/people'}
-       ]
-     }
+  data() {
+    return {
+      drawer: true,
+      links: [
+        { icon: "mdi-speedometer", text: "Dashboard", route: "/" },
+        {
+          icon: "mdi-checkbox-multiple-blank",
+          text: "Product Backlog",
+          route: "/productbacklog"
+        },
+        { icon: "mdi-run", text: "Sprint Backlog", route: "/sprintbacklog" },
+        {
+          icon: "mdi-chart-bar",
+          text: "Burndown Chart",
+          route: "/burndownchart"
+        },
+        { icon: "mdi-view-list", text: "Tasks", route: "/tasks" },
+        { icon: "mdi-account-multiple", text: "People", route: "/people" }
+      ]
+    }
   },
 }
 </script>
