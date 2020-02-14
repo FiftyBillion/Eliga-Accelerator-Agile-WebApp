@@ -2,27 +2,140 @@
   <div class="burndown-chart">
     <h1>Burndown Chart</h1>
 
-    <v-container class="my-5">
-      
-       <v-card outlined>
+    <v-container>
 
-         <line-chart :data="lineChartData"></line-chart>
+      <v-row justify-start class="mb-3">
+         
+         <v-btn small flat color="accent" @click="sortBy('title')">
+          <v-icon small left>mdi-folder</v-icon>
+          <span class="caption text-lowercase">By project name</span>
+        </v-btn>
+        <v-btn small flat color="accent" @click="sortBy('person')">
+          <v-icon small left>mdi-account</v-icon>
+          <span class="caption text-lowercase">By Person</span>
+        </v-btn>
+      </v-row>
+    </v-container>
+    
+    <!-- Add Burndown Chart Popup-->
+    <v-col class="mt-4 mb-3"> 
+        <BrChPopup />
+    </v-col> 
 
-         <pie-chart :data="pieChartData"></pie-chart>
+    <v-divider class="secondary darken-4"></v-divider>
 
-         <v-btn @click="updateChart" color="accent">
-            <v-icon left>mdi-chart-bar</v-icon>
-            <span>Update Chart</span>
-         </v-btn>
-      </v-card>   
+    <v-container>
+       <v-row wrap>
+         <v-col xs="12" md="5" >
+           <v-card outlined>
+            
+             <v-container>
+               <v-row>
+                 <v-btn color="primary">
+                   <v-icon left>mdi-checkbox-multiple-blank</v-icon>
+                   <span>KiTae's Project</span>
+                 </v-btn>
 
-      <v-card>
+                 <v-spacer></v-spacer>
+
+                <v-btn @click="updateChart" color="accent">
+                   <v-icon left>mdi-chart-bar</v-icon>
+                   <span>Update Chart</span>
+                 </v-btn>
+               </v-row>
+             </v-container>
+              
+                <line-chart :data="lineChartData"></line-chart>
+
+                <pie-chart :data="pieChartData"></pie-chart>
+           </v-card>   
+         </v-col>   
+         
+          <v-col xs="12" md="5">
+              <v-card outlined>
+
+                <v-container>
+                   <v-row>
+                     <v-btn color="green">
+                        <v-icon left>mdi-checkbox-multiple-blank</v-icon>
+                        <span>Kevin's Project</span>
+                     </v-btn>
+
+                     <v-spacer></v-spacer>
+
+                     <v-btn @click="updateChart" color="accent">
+                        <v-icon left>mdi-chart-bar</v-icon>
+                         <span>Update Chart</span>
+                     </v-btn>
+                   </v-row>
+                </v-container>
+               
+                    <line-chart :data="lineChartData"></line-chart>
+
+                    <pie-chart :data="pieChartData"></pie-chart>
+              </v-card>
+          </v-col>
+        </v-row>  
+
+        <v-row wrap justify>
+          <v-col xs="12" md="5" >
+
+            <v-card outlined>
+               
+               <v-container>
+                   <v-row>
+                     <v-btn color="grey">
+                        <v-icon left>mdi-checkbox-multiple-blank</v-icon>
+                        <span>Daniel's Project</span>
+                     </v-btn>
+
+                     <v-spacer></v-spacer>
+
+                     <v-btn @click="updateChart" color="accent">
+                        <v-icon left>mdi-chart-bar</v-icon>
+                         <span>Update Chart</span>
+                     </v-btn>
+                   </v-row>
+                </v-container>
+            
+                   <line-chart :data="lineChartData"></line-chart>
+
+                   <pie-chart :data="pieChartData"></pie-chart>
+
+            </v-card>   
+          </v-col>
+         
+           <v-col xs="12" md="5" >
+             <v-card outlined>
+
+                <v-container>
+                   <v-row>
+                     <v-btn color="pink">
+                        <v-icon left>mdi-checkbox-multiple-blank</v-icon>
+                        <span>Rasapon's Project</span>
+                     </v-btn>
+
+                     <v-spacer></v-spacer>
+
+                     <v-btn @click="updateChart" color="accent">
+                        <v-icon left>mdi-chart-bar</v-icon>
+                         <span>Update Chart</span>
+                     </v-btn>
+                   </v-row>
+                </v-container>
+               
+                   <line-chart :data="lineChartData"></line-chart>
+
+                   <pie-chart :data="pieChartData"></pie-chart>
+
+              </v-card>
+           </v-col>
+        </v-row>  
         
-
-      </v-card>
 
     </v-container>
 
+   
   </div>
 </template>
 
