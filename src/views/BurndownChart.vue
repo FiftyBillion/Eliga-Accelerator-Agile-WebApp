@@ -15,13 +15,14 @@
           <span class="caption text-lowercase">By Person</span>
         </v-btn>
       </v-row>
+      <v-col > 
+        <AddChtPopup />
+      </v-col> 
+
     </v-container>
     
     <!-- Add Burndown Chart Popup-->
-    <v-col class="mt-4 mb-3"> 
-        <BrChPopup />
-    </v-col> 
-
+    
     <v-divider class="secondary darken-4"></v-divider>
 
     <v-container>
@@ -31,10 +32,12 @@
             
              <v-container>
                <v-row>
-                 <v-btn color="primary">
+         <!--   <v-btn color="primary">
                    <v-icon left>mdi-checkbox-multiple-blank</v-icon>
                    <span>KiTae's Project</span>
-                 </v-btn>
+                 </v-btn> -->
+                 <ProInfoPopup />
+
 
                  <v-spacer></v-spacer>
 
@@ -140,7 +143,12 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import AddChtPopup from '@/components/AddChtPopup.vue'
+import ProInfoPopup from '@/components/ProInfoPopup.vue'
+
 export default {
+  components : { AddChtPopup, ProInfoPopup}, 
   name: 'burndown-chart',
   data(){
     return {
