@@ -4,7 +4,7 @@
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
         
-        <v-btn left="" class="accent" dark v-on="on">Create a New Chart</v-btn>
+        <v-btn class="accent" dark v-on="on">Create a New Chart</v-btn>
     
       </template>
       <v-card>
