@@ -15,7 +15,7 @@
 
                     <v-menu max-width="290">
                         <template v-slot:activator ="{ on }" >
-                            <v-text-field :value="formattedDate" label="Due date" prepend-icon="mdi-calendar-range" v-on="on"></v-text-field>
+                            <v-text-field v-model="formattedDate" label="Due date" prepend-icon="mdi-calendar-range" v-on="on"></v-text-field>
                         </template>
                         <v-date-picker v-model="formattedDate"></v-date-picker>
                     </v-menu>
@@ -32,7 +32,7 @@
 <script>
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
-
+import { mapActions } from 'vuex'
  
 
 export default {
@@ -47,17 +47,25 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Project', ['addProject']),
     submit() {
       if(this.$refs.form.validate()) {
 
       // eslint-disable-next-line no-console
-      console.log(this.title, this.content) 
+      console.log(this.title, this.content)
+      
+      var pro = { title: this.title, content: this.content, due: this.formattedDate, person: 'Ki Tae', status: 'ongoing' }
+      this.addProject(pro)
+      this.title = ''
+      this.content = ''
+      this.due = null
      }
+
     },
   computed: {
     formattedDate(){
-    return this.due ? format(parseISO(this.due), 'do MMM yyyy') : ''
-   },
+    return this.due ? format(parseISO(this.due), 'YYYY MM DD') : ''
+   }
   }
  }
 }

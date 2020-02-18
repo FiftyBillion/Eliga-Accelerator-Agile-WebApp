@@ -7,6 +7,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import auth0 from 'auth0-js'
 import router from '../router'
+import Project from '../store/Project'
 
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
@@ -66,6 +67,7 @@ export default new Vuex.Store({
   modules: {
     ProductBacklog,
     SprintBacklog,
-    Sprint
+    Sprint,
+    Project
   }
 })

@@ -51,19 +51,17 @@
 <script>
 // @ is an alias to /src
 import TKPopup from '@/components/TKPopup.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: { TKPopup },
   name: 'tasks',
   data () {
     return {
-      projects: [
-        { title: 'Design a new website', person: 'Ki Tae Park', due: '17th Mar 2020', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Code up the homepage', person: 'Kevin Wu', due: '17th Mar 2020', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Code up the homepage', person: 'Rasapon Pinyapap', due: '17th Mar 2020', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Create a database', person: 'Daniel Cheng', due: '17th Mar 2020', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-      ]
     }
+ },
+ computed: {
+   ...mapState('Project', ['projects'])
  },
  methods: {
     sortBy(prop) {
