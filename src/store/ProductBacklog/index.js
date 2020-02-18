@@ -30,7 +30,7 @@ export default {
       commit("REMOVE_ITEM", item);
     },
     getPB: ({ commit }) => {
-      Axios.get('http://192.168.1.12:8000/api/productbacklog/')
+      Axios.get('http://54.188.22.63/api/productbacklog/')
       .then(Response => {
         commit('SET_PB', Response.data);
       })
