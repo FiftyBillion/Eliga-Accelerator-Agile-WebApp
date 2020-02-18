@@ -30,6 +30,8 @@ const routes = [
     children: [
     {
       path: '',
+      name: 'default',
+      redirect: 'pbtosb',
       component: PBtoSB
     },
     {

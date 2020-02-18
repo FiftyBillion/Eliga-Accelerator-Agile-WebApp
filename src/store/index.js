@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import ProductBacklog from './ProductBacklog'
+import SprintBacklog from './SprintBacklog'
+import Sprint from './Sprint'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(Vuex)
+Vue.use(VueAxios, axios)
 
 export default new Vuex.Store({
   state: {
@@ -12,6 +17,8 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    ProductBacklog
+    ProductBacklog,
+    SprintBacklog,
+    Sprint
   }
 })

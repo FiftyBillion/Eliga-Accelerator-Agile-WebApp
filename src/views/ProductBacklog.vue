@@ -24,7 +24,7 @@
       <v-divider class="secondary darken-4"></v-divider>
 
       <v-container>
-        <v-row align="center" v-for="(item, index) in PBitems" :key="index">
+        <v-row align="center" v-for="(item, index) in pb" :key="index">
           <v-col cols="8" class="py-2">
             <v-card class="accent">
               <v-container class="pa-0">
@@ -34,8 +34,9 @@
                       <v-card-text class="py-0">{{ item.content }}</v-card-text>
                     </div>
                   </v-col>
-                  <v-col cols="2" align-self="center">
-                    <v-btn @click="removeBacklog(index)">
+                  <v-spacer></v-spacer>
+                  <v-col align-self="center" class="mr-5">
+                    <v-btn @click="removeBacklog(index)" class="remove-btn">
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
                   </v-col>
@@ -44,10 +45,10 @@
             </v-card>
           </v-col>
           <v-col cols="2">
-            <v-chip class="red darken-4">{{ item.priority }}</v-chip>
+            <v-chip :class="`${item.priority}`">{{ item.priority }}</v-chip>
           </v-col>
           <v-col cols="2">
-            <v-chip>{{ item.hour }} hr</v-chip>
+            <v-chip>{{ item.hours }} hr</v-chip>
           </v-col>
         </v-row>
       </v-container>
@@ -68,13 +69,35 @@ export default {
     PBPopup
   },
   computed: {
-    ...mapState('ProductBacklog', ['PBitems'])
+    ...mapState('ProductBacklog', ['PBitems']),
+    ...mapState('ProductBacklog', ['pb'])
   },
   methods: {
     ...mapActions('ProductBacklog', ['removePB']),
     removeBacklog(pb) {
       this.removePB(pb)
     }
+  },
+  mounted() {
+    this.$store.dispatch('ProductBacklog/getPB')
   }
 };
 </script>
+
+<style scoped>
+  .v-card:not(.v-sheet--tile):not(.v-card--shaped) {
+    border-radius: 50px;
+  }
+  .remove-btn {
+    border-radius: 50px;
+  }
+  .High {
+    background-color: #ad0000 !important;
+  }
+  .Mid {
+    background-color: #c48300 !important;
+  }
+  .Low {
+    background-color: green !important;
+  }
+</style>
