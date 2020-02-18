@@ -42,7 +42,7 @@ export default new Vuex.Store({
           localStorage.setItem('id_token', authResult.idToken);
           localStorage.setItem('expires_at', expiresAt);
 
-          router.replace('/dashboard');
+          router.replace('/');
         }
         else if (err) {
           alert('login failed. Error #KJN838');

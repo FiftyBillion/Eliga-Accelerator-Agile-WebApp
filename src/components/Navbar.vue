@@ -52,9 +52,9 @@
         </v-list-item>
       </v-list>
 
-      <template v-slot:append>
+      <template v-slot:append v-if="this.$store.state.userIsAuthorized">
         <div class="pa-10">
-          <v-btn block color="red darken-4" >
+          <v-btn block color="red darken-4" @click="logout">
             <span>Sign Out</span>
             <v-icon right>mdi-exit-to-app</v-icon>
           </v-btn>
@@ -87,5 +87,10 @@ export default {
       ]
     }
   },
+  methods: {
+    logout() {
+      this.$store.dispatch('auth0Logout')
+    }
+  }
 }
 </script>
