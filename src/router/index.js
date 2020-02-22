@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard'
 import ProductBacklog from '../views/ProductBacklog'
 import SprintBacklog from '../views/SprintBacklog'
+import SprintPlanning from '../views/SprintPlanning'
 import BurndownChart from '../views/BurndownChart'
 import Tasks from '../views/Tasks'
 import People from '../views/People'
@@ -55,6 +56,12 @@ const routes = [
       name: 'sprint',
       component: Sprint
     }]
+  },
+  {
+    path: '/sprintplanning',
+    name: 'sprintplanning',
+    component: SprintPlanning,
+    meta: { requiresAuth: true}
   },
   {
     path: '/burndownchart',

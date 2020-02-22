@@ -1,7 +1,8 @@
 <template>
   <div class="people">
-    <h1>People</h1>
-
+    <v-container>
+      <h1>People</h1>
+    </v-container>
     
 
     <v-container class="my-5">

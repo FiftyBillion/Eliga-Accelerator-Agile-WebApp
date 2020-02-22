@@ -76,13 +76,14 @@ export default {
           text: "Product Backlog",
           route: "/productbacklog"
         },
+        { icon: "mdi-all-inclusive", text: "Sprint Planning", route: "/sprintplanning" },
         { icon: "mdi-run", text: "Sprint Backlog", route: "/sprintbacklog" },
+        { icon: "mdi-view-list", text: "Tasks", route: "/tasks" },
         {
           icon: "mdi-chart-bar",
           text: "Burndown Chart",
           route: "/burndownchart"
         },
-        { icon: "mdi-view-list", text: "Tasks", route: "/tasks" },
         { icon: "mdi-account-multiple", text: "People", route: "/people" }
       ]
     }

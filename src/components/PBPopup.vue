@@ -34,7 +34,7 @@
                 ></v-overflow-btn>
               </v-col>
               <v-col cols="3" align-self="center">
-                <v-text-field label="Hours" color="accent" suffix="hr" v-model="hour"></v-text-field>
+                <v-text-field label="Hours" color="accent" suffix="hr" v-model="hours"></v-text-field>
               </v-col>
             </v-row>
             <div class="text-right">
@@ -53,21 +53,22 @@ export default {
   data() {
     return {
       dialog: false,
-      content: '',
-      priority: '',
-      hour: '',
+      content: "",
+      priority: "",
+      hours: "",
+      pb: { content: this.content, priority: this.priority, hours: this.hours},
       dropdown_priority: ["High", "Mid", "Low"],
     }
   },
   methods: {
       ...mapActions('ProductBacklog', ['addPB']),
       addBacklog() {
-          var pb = {content: this.content, priority: this.priority, hour:this.hour}
+          var pb = { content: this.content, priority: this.priority, hours: this.hours}
           this.addPB(pb)
           this.dialog = false
           this.content = ''
           this.priority = ''
-          this.hour = ''
+          this.hours = ''
       }
   }
 };
