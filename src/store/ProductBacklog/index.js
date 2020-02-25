@@ -6,11 +6,9 @@ export default {
     pb: []
   },
   mutations: {
-    ADD_ITEM: (state, item) => {
-      state.PBitems.push(item);
-    },
-    REMOVE_ITEM: (state, item) => {
-      state.PBitems.splice(item, 1);
+    REMOVE_PB: (state, pb) => {
+      var index = state.pb.findIndex( p => p.id == pb.id );
+      state.pb.splice(index, 1);
     },
     SET_PB: (state, pb) => {
       state.pb = pb;
@@ -20,8 +18,9 @@ export default {
     }
   },
   actions: {
-    removePB: ({ commit }, item) => {
-      commit("REMOVE_ITEM", item);
+    removePB: ({ commit }, pb) => {
+      commit("REMOVE_PB", pb);
+      Axios.delete(`http://54.188.22.63/api/productbacklog/${pb.id}/`)
     },
     getPB: ({ commit }) => {
       Axios.get('http://54.188.22.63/api/productbacklog/')
@@ -29,8 +28,11 @@ export default {
         commit('SET_PB', Response.data);
       })
     },
-    addPB: (pb) => {
+    addPB: ({ commit }, pb ) => {
       Axios.post('http://54.188.22.63/api/productbacklog/', pb)
+      .then(Response => {
+        commit("ADD_PB", Response.data)
+      })
     }
   }
 };

@@ -24,7 +24,7 @@
       <v-divider class="secondary darken-4"></v-divider>
 
       <v-container>
-        <v-row align="center" v-for="(item, index) in pb" :key="index">
+        <v-row align="center" v-for="item in pb" :key="item.id">
           <v-col cols="8" class="py-2">
             <v-card class="accent">
               <v-container class="pa-0">
@@ -36,7 +36,7 @@
                   </v-col>
                   <v-spacer></v-spacer>
                   <v-col align-self="center" class="mr-5">
-                    <v-btn @click="removeBacklog(index)" class="remove-btn">
+                    <v-btn @click="removeBacklog(item)" class="remove-btn">
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
                   </v-col>
@@ -69,7 +69,6 @@ export default {
     PBPopup
   },
   computed: {
-    ...mapState('ProductBacklog', ['PBitems']),
     ...mapState('ProductBacklog', ['pb'])
   },
   methods: {
