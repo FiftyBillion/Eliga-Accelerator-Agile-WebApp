@@ -1,6 +1,6 @@
 <template>
   <div class="product-backlog">
-    <v-container>
+    <v-container class="stick">
       <h1>Product Backlog</h1>
     </v-container>
 
@@ -23,7 +23,7 @@
       </v-container>
       <v-divider class="secondary darken-4"></v-divider>
 
-      <v-container>
+      <v-container class="scroll">
         <v-row align="center" v-for="item in pb" :key="item.id">
           <v-col cols="8" class="py-2">
             <v-card class="accent">
@@ -98,5 +98,9 @@ export default {
   }
   .Low {
     background-color: green !important;
+  }
+  .scroll {
+    overflow-y: scroll;
+    height: 63vh;
   }
 </style>
