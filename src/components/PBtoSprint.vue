@@ -36,6 +36,8 @@
                   @drop="drop"
                   :sprintid="item.id"
                 >{{ item.name }}</v-card-title>
+                <v-card-subtitle class="text-center pb-0 pt-4">Start Date: {{item.startDate}}</v-card-subtitle>
+                <v-card-subtitle class="text-center pt-0">Due Date: {{item.dueDate}}</v-card-subtitle>
                 <v-divider></v-divider>
                 <v-card-title class="justify-center">
                     <v-btn @click="removeS(item)">
