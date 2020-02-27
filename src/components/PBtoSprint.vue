@@ -2,16 +2,19 @@
   <v-container>
     <v-row>
       <v-col cols="6">
-        <h3 class="text-center">Product Backlog</h3>
+        <h3 class="text-center">Product Backlog (Unassigned)</h3>
         <v-divider class="secondary darken-4 my-3"></v-divider>
         <v-container class="scroll">
           <v-row
             class="py-1 px-5"
-            v-for="item in pb"
+            v-for="item in unassignPB"
             :key="item.id"
             justify="center"
+            :pbid="item.id"
+            draggable="true"
+            @dragstart="start"
           >
-            <v-card class="accent border-radius-50" draggable="true">
+            <v-card class="accent border-radius-50">
               <v-col>
                 <v-card-text class="pa-0" large>{{ item.content }}</v-card-text>
               </v-col>
@@ -26,17 +29,23 @@
         <v-container class="scroll">
           <v-row class="mx-4">
             <v-col cols="6" v-for="item in sprint" :key="item.id">
-              <v-card width="70%" class="center accent" @dragover.prevent="">
-                <v-card-title class="justify-center subtitle-1 wordBreak">{{ item.name }}</v-card-title>
+              <v-card width="70%" class="center accent">
+                <v-card-title
+                  class="justify-center subtitle-1 wordBreak"
+                  @dragover.prevent
+                  @drop="drop"
+                  :sprintid="item.id"
+                >{{ item.name }}</v-card-title>
                 <v-divider></v-divider>
-                <v-card-title class="headline justify-center">3 items</v-card-title>
+                <v-card-title class="justify-center">
+                    <v-btn @click="removeS(item)">
+                        <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                </v-card-title>
               </v-card>
             </v-col>
             <v-col cols="6">
-              <v-btn height="100%" width="70%" class="center-btn accent">
-                <v-icon class="display-3" large>mdi-plus</v-icon>
-                <span class="display-1">Add</span>
-              </v-btn>
+              <SprintPopup></SprintPopup>
             </v-col>
           </v-row>
         </v-container>
@@ -46,22 +55,40 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
+import SprintPopup from '../components/SprintPopup'
 
 export default {
   data() {
-      return {
-      }
+    return {
+      dragPBId: "",
+      dropSprintId: ""
+    };
+  },
+  components: {
+      SprintPopup
   },
   computed: {
-    ...mapState("ProductBacklog", ["pb"]),
+    ...mapState("ProductBacklog", ["unassignPB"]),
     ...mapState("Sprint", ["sprint"])
   },
   mounted() {
     this.$store.dispatch("Sprint/getSprint");
-    this.$store.dispatch("ProductBacklog/getPB");
+    this.$store.dispatch("ProductBacklog/getUnassignPB");
   },
   methods: {
+    ...mapActions("ProductBacklog", ["assignSID"]),
+    ...mapActions("Sprint", ["removeSprint"]),
+    start(evt) {
+      this.dragPBId = evt.target.attributes.pbid.value;
+    },
+    drop(evt) {
+      this.dropSprintId = evt.target.attributes.sprintid.value;
+      this.assignSID({pbid: this.dragPBId, sprintid: this.dropSprintId});
+    },
+    removeS(sprint) {
+        this.removeSprint(sprint)
+    }
   }
 };
 </script>

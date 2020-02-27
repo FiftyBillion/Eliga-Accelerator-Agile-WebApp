@@ -3,7 +3,9 @@ import Axios from "axios";
 export default {
   namespaced: true,
   state: {
-    pb: []
+    pb: [],
+    unassignPB: [],
+    PBinSprint: []
   },
   mutations: {
     REMOVE_PB: (state, pb) => {
@@ -15,6 +17,16 @@ export default {
     },
     ADD_PB: (state, pb) => {
       state.pb.push(pb);
+    },
+    GET_UNASSIGN_PB: (state, unassignPB) => {
+      state.unassignPB = unassignPB
+    },
+    ASSIGN_SID: (state, assigned) => {
+      var index = state.unassignPB.findIndex( p => p.id == assigned.id);
+      state.unassignPB.splice(index, 1);
+    },
+    GET_PB_IN_SPRINT: (state, pb) => {
+      state.PBinSprint = pb
     }
   },
   actions: {
@@ -32,6 +44,25 @@ export default {
       Axios.post('http://54.188.22.63/api/productbacklog/', pb)
       .then(Response => {
         commit("ADD_PB", Response.data)
+      })
+    },
+    getUnassignPB: ({ commit }) => {
+      Axios.get('http://54.188.22.63/api/productbacklog/?sprintID=0')
+      .then(Response => {
+        commit("GET_UNASSIGN_PB", Response.data)
+      })
+    },
+    assignSID: ({ commit }, {pbid, sprintid}) => {
+      Axios.patch(`http://54.188.22.63/api/productbacklog/${pbid}/`, {sprintID: sprintid})
+      .then(Response => {
+        console.log(Response.data, sprintid)
+        commit("ASSIGN_SID", Response.data)
+      })
+    },
+    getPBInSprint: ({ commit }, sprint) => {
+      Axios.get(`http://54.188.22.63/api/productbacklog/?sprintID=${sprint.id}`)
+      .then(Response => {
+        commit('GET_PB_IN_SPRINT',Response.data)
       })
     }
   }
