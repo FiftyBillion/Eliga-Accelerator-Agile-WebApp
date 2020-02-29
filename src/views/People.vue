@@ -8,10 +8,7 @@
     <v-layout>
       <v-flex xs12 md6 class="">
       <div>Members
-        <v-btn small color="grey" class="mx-12" >
-          <v-icon left small>mdi-account-plus</v-icon>
-            <span class= "caption text-lowercase">Add Member</span>
-        </v-btn>
+        <MemberPopup></MemberPopup>
       </div><br>
       </v-flex>
     </v-layout>
@@ -47,6 +44,8 @@
 </template>
 
 <script>
+import MemberPopup from "@/components/MemberPopup";
+import { mapState, mapActions } from "vuex";
 // @ is an alias to /src
 
 export default {
@@ -58,8 +57,23 @@ export default {
         { name: 'Ki Tae Park', role: 'Web Developer', avatar:'/Conan.png' },
         { name: 'Rasapon Pinyapap', role: 'Web Developer', avatar:'Naruto.png' },
       ]
-
+  
     
   }),
+  components: { MemberPopup },
+
+  computed: {
+    ...mapState('People', ['team']),
+    ...mapState('People', ['member'])
+  },
+  methods: {
+    ...mapActions('People', ['removeMEMBER']),
+    removeMEMBER(member) {
+      this.removeMEMBER(member)
+    }
+  },
+  mounted() {
+    this.$store.dispatch('People/getMEMBER')
+  }
 }
 </script>
