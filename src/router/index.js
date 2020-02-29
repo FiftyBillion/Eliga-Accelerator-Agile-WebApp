@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard'
 import ProductBacklog from '../views/ProductBacklog'
 import SprintBacklog from '../views/SprintBacklog'
+import SprintPlanning from '../views/SprintPlanning'
 import BurndownChart from '../views/BurndownChart'
 import Tasks from '../views/Tasks'
 import People from '../views/People'
@@ -12,6 +13,8 @@ import Sprint from '../components/Sprint'
 import LogIn from '../views/LogIn'
 import index from '../store/index'
 import Auth0Callback from '../views/Auth0Callback'
+import PBtoSprint from '../components/PBtoSprint'
+import SprintReview from '../components/SprintReview'
 //import { Store } from 'vuex'
 Vue.use(VueRouter)
 
@@ -36,7 +39,6 @@ const routes = [
     children: [
     {
       path: '',
-      name: 'default',
       redirect: 'pbtosb',
       component: PBtoSB
     },
@@ -54,6 +56,28 @@ const routes = [
       path: 'sprint',
       name: 'sprint',
       component: Sprint
+    }]
+  },
+  {
+    path: '/sprintplanning',
+    name: 'sprintplanning',
+    component: SprintPlanning,
+    meta: { requiresAuth: true},
+    children: [
+    {
+      path: '',
+      redirect: 'pbtos',
+      component: PBtoSprint
+    },
+    {
+      path: 'pbtos',
+      name: 'pbtos',
+      component: PBtoSprint
+    },
+    {
+      path: 'sprintreview',
+      name: 'sprintreview',
+      component: SprintReview
     }]
   },
   {

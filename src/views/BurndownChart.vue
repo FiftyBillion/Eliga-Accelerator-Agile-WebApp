@@ -1,6 +1,8 @@
 <template>
   <div class="burndown-chart">
-    <h1>Burndown Chart</h1>
+    <v-container>
+      <h1>Burndown Chart</h1>
+    </v-container>
 
     <v-container>
 
