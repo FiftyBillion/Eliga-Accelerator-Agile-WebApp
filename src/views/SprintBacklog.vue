@@ -1,146 +1,119 @@
 <template>
   <div class="sprint-backlog">
     <v-container>
-      <h1>Sprint Backlog</h1>
+      <v-row>
+        <v-col cols="3">
+          <h1>Sprint Backlog</h1>
+        </v-col>
+        <v-col cols="2" align-self="center">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn color="accent" v-on="on">Choose Sprint</v-btn>
+            </template>
+            <v-list>
+              <v-list-item three-line v-for="item in sprint" :key="item.id" @click="getThePB(item)">
+                <v-list-item-content>
+                <v-list-item-title>{{ item.name }}</v-list-item-title>
+                <v-list-item-subtitle>Start Date: {{ item.startDate}}</v-list-item-subtitle>
+                <v-list-item-subtitle>Due Date: {{ item.dueDate}}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-col>
+        <v-col align-self="center">
+          <h4>Current Sprint: <span class="title" v-if="currentSprintName != ''">"{{ currentSprintName }}"</span></h4>
+        </v-col>
+      </v-row>
     </v-container>
 
     <v-container>
       <v-row>
-        <v-col cols="2">
-          <h3 class="text-center">Sprint</h3>
+        <v-col cols="6">
+          <h3 class="text-center">User Story</h3>
           <v-divider class="secondary darken-4 my-3"></v-divider>
           <v-container class="scroll">
-          <v-row class="mx-4">
-            <v-col cols="12" v-for="item in sprint" :key="item.id">
-              <v-card width="100%" class="center border-card" ripple @click="getThePB(item)">
-                <v-card-title class="justify-center subtitle-1 wordBreak">{{ item.name }}</v-card-title>
-                <v-card-subtitle class="text-center pb-0 pt-4">Start Date:</v-card-subtitle>
-                <v-card-subtitle class="text-center pb-0 pt-0">{{item.startDate}}</v-card-subtitle>
-                <v-card-subtitle class="text-center pb-0 pt-0">Due Date:</v-card-subtitle>
-                <v-card-subtitle class="text-center pt-0">{{item.dueDate}}</v-card-subtitle>
-              </v-card>
-            </v-col>
+          <v-row class="py-1 px-5" v-for="item in PBinSprint2" :key="item.id" justify="center">
+            <v-card class="border-card border-radius-50" ripple @click="getTheTask(item)" :class="{ active: active_pb == item.id}">
+              <v-col>
+                <v-card-text class="pa-0" large>{{ item.content }}</v-card-text>
+              </v-col>
+            </v-card>
           </v-row>
           </v-container>
         </v-col>
         <v-divider vertical class="secondary darken-4"></v-divider>
-        <v-col cols="5">
-          <h3 class="text-center">Product Backlog</h3>
-          <v-divider class="secondary darken-4 my-3"></v-divider>
-          <v-row class="py-1 px-5" v-for="item in PBinSprint" :key="item.id" justify="center">
-            <v-card class="accent border-radius-50">
-              <v-col>
-                <v-card-text class="pa-0" large>{{ item.content }}</v-card-text>
-              </v-col>
-            </v-card>
-          </v-row>
-        </v-col>
-        <v-divider vertical class="secondary darken-4"></v-divider>
         <v-col>
-          <h3 class="text-center">Sprint Backlog</h3>
+          <h3 class="text-center">Task</h3>
           <v-divider class="secondary darken-4 my-3"></v-divider>
-          <v-row class="py-1 px-5" v-for="item in SBinSprint" :key="item.id" justify="center">
+          <v-container class="scroll">
+          <v-row class="py-1 px-5" v-for="item in taskInPB" :key="item.id" justify="center">
+            <v-col>
             <v-card class="accent border-radius-50">
               <v-col>
-                <v-card-text class="pa-0" large>{{ item.content }}</v-card-text>
+                <v-card-text class="pa-0" large>
+                  {{ item.content }}
+                </v-card-text>
               </v-col>
             </v-card>
+            </v-col>
+            <v-col cols="2">
+              <v-row justify="center">
+                <v-chip>{{item.hours}} hr</v-chip>
+              </v-row>
+              <v-row>
+                <v-chip :class="`${item.status}`">{{item.status}}</v-chip>
+              </v-row>
+            </v-col>
           </v-row>
           <v-row class="py-1" justify="center">
-          <v-btn rounded class="btn-border" v-if="currentSID != ''">
-            <v-icon>mdi-plus</v-icon>
-            <span>Add</span>
-          </v-btn>
-        </v-row>
+            <NewTaskPopup v-if="currentPBID != 0"></NewTaskPopup>
+          </v-row>
+          </v-container>
         </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
 
-<!--
-<template>
-  <div class="sprint-backlog">
-    <v-container>
-      <h1>Sprint Backlog</h1>
-    </v-container>
-
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-btn
-            class="btn-border center-btn"
-            rounded
-            active-class="accent"
-            large
-            route
-            :to="{name: 'pbtosb'}"
-          >
-            <span class="pr-1">Sprint</span>
-            <v-icon>mdi-arrow-right</v-icon>
-            <span class="pl-1">Sprint Backlog</span>
-          </v-btn>
-        </v-col>
-        <v-col>
-          <v-btn
-            class="btn-border center-btn"
-            rounded
-            active-class="accent"
-            large
-            route
-            :to="{name: 'sbtosprint'}"
-          >
-            <span class="pr-1">Sprint Backlog</span>
-            <v-icon>mdi-arrow-right</v-icon>
-            <span class="pl-1">Sprint</span>
-          </v-btn>
-        </v-col>
-        <v-col>
-          <v-btn
-            class="btn-border center-btn"
-            rounded
-            active-class="accent"
-            large
-            route
-            :to="{name: 'sprint'}"
-          >
-            <span>Sprints</span>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-
-    <router-view></router-view>
-  </div>
-</template>
--->
 <script>
-import { mapState,mapActions } from 'vuex';
-// @ is an alias to /src
+import { mapState, mapActions } from "vuex";
+import NewTaskPopup from '../components/NewTaskPopup'
 
 export default {
   name: "sprint-backlog",
   data() {
     return {
-      currentSID: ''
     }
   },
+  components: {
+    NewTaskPopup
+  },
   computed: {
-    ...mapState('Sprint', ['sprint']),
-    ...mapState("ProductBacklog", ["PBinSprint"]),
-    ...mapState('SprintBacklog', ['SBinSprint'])
+    ...mapState("ProductBacklog", ["PBinSprint2", "currentPBID", "active_pb"]),
+    ...mapState("Sprint", ["sprint"]),
+    ...mapState("SprintBacklog", ['currentSprintName']),
+    ...mapState("Task", ['taskInPB'])
   },
   mounted() {
-    this.$store.dispatch('Sprint/getSprint'),
-    this.$store.dispatch('SprintBacklog/getSB')
+    this.$store.dispatch("Sprint/getSprint")
+    this.$store.dispatch("SprintBacklog/getSB")
+    this.$store.dispatch("Task/getTask")
   },
   methods: {
-    ...mapActions("ProductBacklog", ["getPBInSprint"]),
-    ...mapActions("SprintBacklog", ["getSBInSprint"]),
+    ...mapActions("ProductBacklog", ["getPBInSprint2", "setCurrentPBID", "resetCurrentPBID", "setActivePB"]),
+    ...mapActions("SprintBacklog", ["setCurrentSprintName"]),
+    ...mapActions("Task", ["getTaskInPB", "resetTaskInPB"]),
     getThePB(sprint) {
-      this.getPBInSprint(sprint)
-      this.getSBInSprint(sprint)
-      this.currentSID = sprint.id
+      this.getPBInSprint2(sprint);
+      this.setCurrentSprintName(sprint)
+      this.resetTaskInPB();
+      this.resetCurrentPBID();
+    },
+    getTheTask(pb) {
+      this.setCurrentPBID(pb)
+      this.getTaskInPB(pb)
+      this.setActivePB(pb.id)
     }
   }
 };
@@ -167,10 +140,23 @@ export default {
   border: #b7a57a 1px solid;
 }
 .scroll {
-    overflow-y: scroll;
-    height: 63vh;
+  overflow-y: scroll;
+  height: 63vh;
 }
 .wordBreak {
   word-break: keep-all;
+}
+.active {
+  background-color: #85754d;
+}
+.Incomplete {
+  background-color: darkred !important;
+}
+.Completed {
+  background-color: green !important;
+}
+.scroll {
+  overflow-y: scroll;
+  height: 60vh;
 }
 </style>

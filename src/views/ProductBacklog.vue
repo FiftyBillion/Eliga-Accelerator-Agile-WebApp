@@ -1,6 +1,6 @@
 <template>
   <div class="product-backlog">
-    <v-container class="stick">
+    <v-container class="stick pb-0 pt-5">
       <h1>Product Backlog</h1>
     </v-container>
 
@@ -11,13 +11,13 @@
             <PBPopup></PBPopup>
           </v-col>
           <v-col cols="5">
-            <span>Product Backlog</span>
+            <span class="title">User Story</span>
           </v-col>
-          <v-col cols="2">
-            <span>Priority</span>
+          <v-col cols="2" class="pl-0">
+            <span class="title">Priority</span>
           </v-col>
-          <v-col cols="2">
-            <span>Hours</span>
+          <v-col cols="2" class="pl-0">
+            <span class="title">Hours</span>
           </v-col>
         </v-row>
       </v-container>

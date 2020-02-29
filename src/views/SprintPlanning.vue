@@ -1,11 +1,10 @@
 <template>
   <div class="sprintplanning">
     <v-container>
-        <h1>Sprint Planning</h1>
-    </v-container>
-
-    <v-container>
       <v-row>
+        <v-col cols="3">
+          <h1>Sprint Planning</h1>
+        </v-col>
         <v-col>
           <v-btn
             class="btn-border center-btn"
@@ -15,7 +14,7 @@
             route
             :to="{name: 'pbtos'}"
           >
-            <span class="pr-1">Product Backlog</span>
+            <span class="pr-1">User Story</span>
             <v-icon>mdi-arrow-right</v-icon>
             <span class="pl-1">Sprint</span>
           </v-btn>
@@ -29,9 +28,10 @@
             route
             :to="{name: 'sprintreview'}"
           >
-            <span>Sprints</span>
+            <span>Sprint Review</span>
           </v-btn>
         </v-col>
+
       </v-row>
     </v-container>
     <router-view></router-view>
@@ -53,6 +53,6 @@ export default {
   opacity: 0;
 }
 .center-btn {
-  margin: 0 40%;
+  margin: 0 30%;
 }
 </style>

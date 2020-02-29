@@ -5,7 +5,10 @@ export default {
   state: {
     pb: [],
     unassignPB: [],
-    PBinSprint: []
+    PBinSprint1: [],
+    PBinSprint2: [],
+    currentPBID: 0,
+    active_pb: ''
   },
   mutations: {
     REMOVE_PB: (state, pb) => {
@@ -26,7 +29,20 @@ export default {
       state.unassignPB.splice(index, 1);
     },
     GET_PB_IN_SPRINT: (state, pb) => {
-      state.PBinSprint = pb
+      state.PBinSprint1 = pb
+    },
+    GET_PB_IN_SPRINT2: (state, pb) => {
+      state.PBinSprint2 = pb
+    },
+    SET_CURRENTPBID: (state, pbid) => {
+      state.currentPBID = pbid
+    },
+    RESET_CURRENTPBID: (state) => {
+      state.currentPBID = 0
+      state.active_pb = ''
+    },
+    SET_ACTIVE_PB: (state, active_pb) => {
+      state.active_pb = active_pb
     }
   },
   actions: {
@@ -47,23 +63,38 @@ export default {
       })
     },
     getUnassignPB: ({ commit }) => {
-      Axios.get('http://54.188.22.63/api/productbacklog/?sprintID=0')
+      Axios.get('http://54.188.22.63/api/productbacklog/?sprintbacklogID=0')
       .then(Response => {
         commit("GET_UNASSIGN_PB", Response.data)
       })
     },
     assignSID: ({ commit }, {pbid, sprintid}) => {
-      Axios.patch(`http://54.188.22.63/api/productbacklog/${pbid}/`, {sprintID: sprintid})
+      Axios.patch(`http://54.188.22.63/api/productbacklog/${pbid}/`, {sprintbacklogID: sprintid})
       .then(Response => {
         console.log(Response.data, sprintid)
         commit("ASSIGN_SID", Response.data)
       })
     },
     getPBInSprint: ({ commit }, sprint) => {
-      Axios.get(`http://54.188.22.63/api/productbacklog/?sprintID=${sprint.id}`)
+      Axios.get(`http://54.188.22.63/api/productbacklog/?sprintbacklogID=${sprint.id}`)
       .then(Response => {
         commit('GET_PB_IN_SPRINT',Response.data)
       })
+    },
+    getPBInSprint2: ({ commit }, sprint) => {
+      Axios.get(`http://54.188.22.63/api/productbacklog/?sprintbacklogID=${sprint.id}`)
+      .then(Response => {
+        commit('GET_PB_IN_SPRINT2',Response.data)
+      })
+    },
+    setCurrentPBID: ({ commit }, pb) => {
+      commit('SET_CURRENTPBID', pb.id)
+    },
+    resetCurrentPBID: ({ commit }) => {
+      commit('RESET_CURRENTPBID')
+    },
+    setActivePB: ({ commit }, activePB) => {
+      commit('SET_ACTIVE_PB', activePB)
     }
   }
 };

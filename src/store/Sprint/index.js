@@ -19,20 +19,20 @@ export default {
   },
   actions: {
     getSprint: ({ commit }) => {
-      Axios.get('http://54.188.22.63/api/sprint/')
+      Axios.get('http://54.188.22.63/api/sprintbacklog/')
       .then(Response => {
         commit('GET_SPRINT', Response.data)
       })
     },
     addSprint: ({ commit }, sprint) => {
-      Axios.post('http://54.188.22.63/api/sprint/', sprint)
+      Axios.post('http://54.188.22.63/api/sprintbacklog/', sprint)
       .then(Response => {
         commit('ADD_SPRINT', Response.data)
       })
     },
     removeSprint: ({ commit }, sprint) => {
       commit('REMOVE_SPRINT', sprint)
-      Axios.delete(`http://54.188.22.63/api/sprint/${sprint.id}/`)
+      Axios.delete(`http://54.188.22.63/api/sprintbacklog/${sprint.id}/`)
     }
   }
 };

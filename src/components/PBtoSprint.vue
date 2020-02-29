@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="6">
-        <h3 class="text-center">Product Backlog (Unassigned)</h3>
+        <h3 class="text-center">User Story (Unassigned)</h3>
         <v-divider class="secondary darken-4 my-3"></v-divider>
         <v-container class="scroll">
           <v-row
@@ -28,7 +28,7 @@
         <v-divider class="secondary darken-4 my-3"></v-divider>
         <v-container class="scroll">
           <v-row class="mx-4">
-            <v-col cols="6" v-for="item in sprint" :key="item.id">
+            <v-col cols="12" v-for="item in sprint" :key="item.id">
               <v-card width="70%" class="center accent">
                 <v-card-title
                   class="justify-center subtitle-1 wordBreak"
@@ -46,7 +46,7 @@
                 </v-card-title>
               </v-card>
             </v-col>
-            <v-col cols="6">
+            <v-col cols="12">
               <SprintPopup></SprintPopup>
             </v-col>
           </v-row>
@@ -111,6 +111,6 @@ export default {
 }
 .scroll {
   overflow-y: scroll;
-  height: 55vh;
+  height: 60vh;
 }
 </style>
