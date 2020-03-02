@@ -10,6 +10,7 @@ import router from '../router'
 import Project from '../store/Project'
 import Task from '../store/Task'
 import People from '../store/People'
+import Burndown from '../store/Burndown'
 
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
@@ -72,6 +73,7 @@ export default new Vuex.Store({
     Sprint,
     Project,
     Task,
-    People
+    People,
+    Burndown
   }
 })

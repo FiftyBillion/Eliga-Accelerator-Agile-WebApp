@@ -71,7 +71,6 @@ export default {
     assignSID: ({ commit }, {pbid, sprintid}) => {
       Axios.patch(`http://54.188.22.63/api/productbacklog/${pbid}/`, {sprintbacklogID: sprintid})
       .then(Response => {
-        console.log(Response.data, sprintid)
         commit("ASSIGN_SID", Response.data)
       })
     },
