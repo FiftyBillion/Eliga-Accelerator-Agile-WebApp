@@ -29,17 +29,15 @@
         <v-container class="scroll">
           <v-row class="mx-4">
             <v-col cols="12" v-for="item in sprint" :key="item.id">
-              <v-card width="70%" class="center accent">
+              <v-card width="70%" class="center accent" @dragover.prevent @drop="drop" :sprintid="item.id">
                 <v-card-title
                   class="justify-center subtitle-1 wordBreak"
-                  @dragover.prevent
-                  @drop="drop"
                   :sprintid="item.id"
                 >{{ item.name }}</v-card-title>
-                <v-card-subtitle class="text-center pb-0 pt-4">Start Date: {{item.startDate}}</v-card-subtitle>
-                <v-card-subtitle class="text-center pt-0">Due Date: {{item.dueDate}}</v-card-subtitle>
-                <v-divider></v-divider>
-                <v-card-title class="justify-center">
+                <v-card-subtitle class="text-center pb-0 pt-4" :sprintid="item.id">Start Date: {{item.startDate}}</v-card-subtitle>
+                <v-card-subtitle class="text-center pt-0" :sprintid="item.id">Due Date: {{item.dueDate}}</v-card-subtitle>
+                <v-divider @dragover.stop></v-divider>
+                <v-card-title class="justify-center" @dragover.stop>
                     <v-btn @click="removeS(item)">
                         <v-icon>mdi-delete</v-icon>
                     </v-btn>

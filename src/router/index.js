@@ -7,14 +7,13 @@ import SprintPlanning from '../views/SprintPlanning'
 import BurndownChart from '../views/BurndownChart'
 import Tasks from '../views/Tasks'
 import People from '../views/People'
-import PBtoSB from '../components/PBtoSB'
-import SBtoSprint from '../components/SBtoSprint'
-import Sprint from '../components/Sprint'
 import LogIn from '../views/LogIn'
 import index from '../store/index'
 import Auth0Callback from '../views/Auth0Callback'
 import PBtoSprint from '../components/PBtoSprint'
 import SprintReview from '../components/SprintReview'
+import TasktoPeople from '../components/TasktoPeople'
+import TaskReview from '../components/TaskReview'
 //import { Store } from 'vuex'
 Vue.use(VueRouter)
 
@@ -36,27 +35,6 @@ const routes = [
     name: 'sprintbacklog',
     component: SprintBacklog,
     meta: { requiresAuth: true},
-    children: [
-    {
-      path: '',
-      redirect: 'pbtosb',
-      component: PBtoSB
-    },
-    {
-      path: 'pbtosb',
-      name: 'pbtosb',
-      component: PBtoSB
-    },
-    {
-      path: 'sbtosprint',
-      name: 'sbtosprint',
-      component: SBtoSprint
-    },
-    {
-      path: 'sprint',
-      name: 'sprint',
-      component: Sprint
-    }]
   },
   {
     path: '/sprintplanning',
@@ -66,8 +44,7 @@ const routes = [
     children: [
     {
       path: '',
-      redirect: 'pbtos',
-      component: PBtoSprint
+      redirect: 'pbtos'
     },
     {
       path: 'pbtos',
@@ -90,7 +67,23 @@ const routes = [
     path: '/tasks',
     name: 'tasks',
     component: Tasks,
-    meta: { requiresAuth: true}
+    meta: { requiresAuth: true},
+    children: [
+      {
+        path: '',
+        redirect: 'tasktopeople'
+      },
+      {
+        path: 'tasktopeople',
+        name: 'tasktopeople',
+        component: TasktoPeople
+      },
+      {
+        path: 'taskreview',
+        name: 'taskreview',
+        component: TaskReview
+      }
+    ]
   },
   {
     path: '/people',
