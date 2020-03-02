@@ -16,30 +16,24 @@
 
     <v-divider></v-divider>
 
-      <v-layout row wrap>
-        <v-flex xs12 sm6 md4 lg3 v-for="person in team" :key="person.name">
+      <v-row>
+        <v-col xs12 sm6 md4 lg3 v-for="person in member" :key="person.id">
         <v-card class="text-xs-center ma-3">
-          <v-responsive class="pt-4">
-            <v-avatar size="100">
-              <img :src="person.avatar">
-            </v-avatar>
-          </v-responsive>
         <v-card-text>
           <div class="subheading">{{ person.name }}</div>
           <div class="grey--text">{{ person.role }}</div>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="grey">
-            <v-icon small left>mdi-message-text-outline</v-icon>
-            <span>Message</span>
+          <v-btn @click="removeMEMBER(member)" class="remove-btn">
+            <v-icon>mdi-delete</v-icon>
           </v-btn>
         </v-card-actions>
         </v-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
+      <v-btn @click="test()">Test</v-btn>
       
     </v-container>
-      
 
   </div>
 </template>
@@ -47,30 +41,35 @@
 <script>
 import MemberPopup from "@/components/MemberPopup";
 import { mapState, mapActions } from "vuex";
+import Axios from 'axios'
 // @ is an alias to /src
 
 export default {
   name: 'people',
-  data: () => ({  
-  team: [
-        { name: 'Kevin Wu', role: 'Web Developer', avatar: '/IronMan.png' },
-        { name: 'Daniel Cheng', role: 'Web Developer', avatar:'/SpongeBob.png' },
-        { name: 'Ki Tae Park', role: 'Web Developer', avatar:'/Conan.png' },
-        { name: 'Rasapon Pinyapap', role: 'Web Developer', avatar:'Naruto.png' },
-      ]
-  
-    
+  data: () => ({
   }),
   components: { MemberPopup },
 
   computed: {
-    ...mapState('People', ['team']),
     ...mapState('People', ['member'])
   },
   methods: {
     ...mapActions('People', ['removeMEMBER']),
     removeMEMBER(member) {
       this.removeMEMBER(member)
+    },
+    async test() {
+      // Get the access token from the auth wrapper
+      const token = await this.$auth0.getTokenSilently();
+
+      // Use Axios to make a call to the API
+      const { data } = await Axios.get("https://dev-6qgo211e.auth0.com/api/v2/users/", {
+        headers: {
+          Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
+        }
+      });
+
+      console.log(data)
     }
   },
   mounted() {

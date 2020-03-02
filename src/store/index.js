@@ -9,6 +9,7 @@ import auth0 from 'auth0-js'
 import router from '../router'
 import Project from '../store/Project'
 import Task from '../store/Task'
+import People from '../store/People'
 
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
@@ -70,6 +71,7 @@ export default new Vuex.Store({
     SprintBacklog,
     Sprint,
     Project,
-    Task
+    Task,
+    People
   }
 })
