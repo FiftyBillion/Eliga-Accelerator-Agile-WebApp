@@ -62,12 +62,10 @@
         </v-container>
         <line-chart
         height="450px"
-        :data="lineChartData_1"
-        :xmin="startDate"
-        :xmax="endDate"
-        :discrete="true"
+        :data="lineChart"
         xtitle="Date"
         ytitle="Tasks"
+        :colors="['#b7a57a', '#4b2e83']"
         ></line-chart>
       </v-card>
     </v-container>
@@ -75,6 +73,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 // eslint-disable-next-line no-unused-vars
 
 export default {
@@ -143,6 +142,12 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    ...mapState('Burndown', ['lineChart'])
+  },
+  mounted() {
+    this.$store.dispatch('Burndown/setData');
   }
 };
 </script>
