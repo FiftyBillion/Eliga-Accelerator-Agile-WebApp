@@ -24,7 +24,8 @@ export default new Vuex.Store({
       redirectUri: process.env.VUE_APP_DOMAINURL + '/auth0callback',
       responseType: process.env.VUE_APP_AUTH0_CONFIG_RESPONSETYPE,
       scope: process.env.VUE_APP_AUTH0_CONFIG_SCOPE,
-    })
+    }),
+    profile: ''
   }, 
   mutations: {
     setUserIsAuthenticated(state, replacement){
@@ -45,7 +46,10 @@ export default new Vuex.Store({
           localStorage.setItem('access_token', authResult.accessToken);
           localStorage.setItem('id_token', authResult.idToken);
           localStorage.setItem('expires_at', expiresAt);
-
+          localStorage.setItem('profilename', authResult.idTokenPayload.name)
+          localStorage.setItem('profilepicture', authResult.idTokenPayload.picture)
+          //context.state.profile = authResult.idTokenPayload
+          //console.log(context.state.profile)
           router.replace('/');
         }
         else if (err) {
