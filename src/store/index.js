@@ -7,7 +7,6 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import auth0 from 'auth0-js'
 import router from '../router'
-import Project from '../store/Project'
 import Task from '../store/Task'
 import People from '../store/People'
 import Burndown from '../store/Burndown'
@@ -75,7 +74,6 @@ export default new Vuex.Store({
     ProductBacklog,
     SprintBacklog,
     Sprint,
-    Project,
     Task,
     People,
     Burndown
