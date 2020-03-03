@@ -6,7 +6,9 @@ export default {
         startEnd: [],
         totalTask: '',
         data: {},
+        data2: {},
         chart: {},
+        chart2: {},
         lineChart: []
     },
     mutations: {
@@ -14,14 +16,22 @@ export default {
             state.startEnd = startEnd
         },
         SET_DATA: (state, {dates, taskNumb}) => {
+            Object.assign(state.data,{[state.startEnd[0]]: state.totalTask})
+            Object.assign(state.data2,{[state.startEnd[0]]: state.totalTask})
             for(var i = 0; i < dates.length; i++) {
                 Object.assign(state.data, {[dates[i]]: taskNumb[i]})
             }
+            Object.assign(state.data2,{[state.startEnd[1]]: 0})
             Object.assign(state.chart, {name: "Actual Tasks", data: state.data})
-            state.lineChart=[state.chart]
+            Object.assign(state.chart2, {name: "Ideal Tasks", data: state.data2})
+            state.lineChart=[state.chart, state.chart2]
         },
         SET_TOTAL: (state, totalTask) => {
             state.totalTask = totalTask
+        },
+        RESET_CHART: (state) => {
+            state.data = {}
+            state.data2 = {}
         }
     },
     actions: {
@@ -37,7 +47,7 @@ export default {
                 commit('SET_TOTAL', Response.data.length)
                 totalTask = Response.data.length
                 for(var i = 0; i < Response.data.length; i++) {
-                    if(Response.data[i].dateCompleted != null) {
+                    if(Response.data[i].dateCompleted != null && !dates.includes(Response.data[i].dateCompleted)) {
                         dates.push(Response.data[i].dateCompleted)
                     }
                 }
@@ -51,6 +61,9 @@ export default {
                     })
                 }
             })
+        },
+        resetChart: ({ commit }) => {
+            commit('RESET_CHART')
         }
     }
 }
