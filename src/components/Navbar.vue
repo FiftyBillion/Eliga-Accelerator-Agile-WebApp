@@ -33,10 +33,10 @@
           <v-col class="mx-5">
             <v-avatar>
               <v-img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDOaXs_L_jjci3OGgZO7qF3q6NgRR8gRwcRVw1qsJR7NtRIJ-c"
+                :src="profilepicture"
               ></v-img>
             </v-avatar>
-            <span class="ml-5">Iron Man</span>
+            <span class="ml-5">{{profilename}}</span>
           </v-col>
         </v-row>
       </v-container>
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -85,13 +86,26 @@ export default {
           route: "/burndownchart"
         },
         { icon: "mdi-account-multiple", text: "People", route: "/people" }
-      ]
+      ],
+      profilename: '',
+      profilepicture: ''
     }
   },
   methods: {
     logout() {
       this.$store.dispatch('auth0Logout')
+    },
+    getdata(){
+      this.profilename = localStorage.getItem('profilename')
+      this.profilepicture = localStorage.getItem('profilepicture')
     }
+    
+  },
+  computed:{
+    ...mapState(['profile'])
+  },
+  mounted() {
+    this.getdata()
   }
 }
 </script>

@@ -32,16 +32,10 @@
               v-model="role"
               class="pt-5"
             ></v-textarea>
-            <v-file-input
-                :rules="rules"
-                accept="image/png, image/jpeg, image/bmp"
-                placeholder="Pick an avatar"
-                prepend-icon="mdi-camera"
-                label="Avatar"
-            ></v-file-input>
+     
 
             <div class="text-right">
-              <v-btn class="primary" >Submit</v-btn>
+              <v-btn class="primary" @click="addMember()">Submit</v-btn>
             </div>
           </v-form>
         </v-card-text>
@@ -51,25 +45,23 @@
 </template>
 
 <script>
-//import { mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
       dialog: false,
       name: '',
-      role: '',
-      avatar: '', 
+      role: ''
     }
   },
   methods: {
-      //...mapActions('People', ['addMEMBER']),
+      ...mapActions('People', ['addMEMBER']),
       addMember() {
-          var member = {name: this.name, role: this.role, avatar:this.avatar}
+          var member = {name: this.name, role: this.role}
           this.addMEMBER(member)
           this.dialog = false
           this.name = ''
           this.role = ''
-          this.avatar = ''
       } 
   }
 };
