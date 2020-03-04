@@ -3,20 +3,15 @@ import Axios from "axios";
 export default {
   namespaced: true,
   state: {
-    team: [
-        { name: 'Kevin Wu', role: 'Web Developer', avatar: '/IronMan.png' },
-        { name: 'Daniel Cheng', role: 'Web Developer', avatar:'/SpongeBob.png' },
-        { name: 'Ki Tae Park', role: 'Web Developer', avatar:'/Conan.png' },
-        { name: 'Rasapon Pinyapap', role: 'Web Developer', avatar:'Naruto.png' },
-      ],
     member: []
   },
   mutations: {
     ADD_MEMBER: (state, item) => {
       state.member.push(item);
     },
-    REMOVE_MEMBER: (state, item) => {
-      state.team.splice(item, 1);
+    REMOVE_MEMBER: (state, personID) => {
+      var index = state.member.findIndex( p => p.id == personID );
+      state.member.splice(index, 1);
     },
     SET_MEMBER: (state, member) => {
       state.member = member;
@@ -27,8 +22,9 @@ export default {
       Axios.post('http://54.188.22.63/api/user/', item)
       commit("ADD_MEMBER", item);
     },
-    removeMEMBER: ({ commit }, item) => {
-      commit("REMOVE_MEMBER", item);
+    removeMEMBER: ({ commit }, personID) => {
+      Axios.delete(`http://54.188.22.63/api/user/${personID}/`)
+      commit('REMOVE_MEMBER', personID)
     },
     getMEMBER: ({ commit }) => {
       Axios.get('http://54.188.22.63/api/user/')

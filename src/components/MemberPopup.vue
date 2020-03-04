@@ -21,7 +21,6 @@
               v-model="name"
               class="pt-5"
             ></v-textarea>
-            <br>
              <v-textarea
               prepend-icon="mdi-view-list"
               color="accent"

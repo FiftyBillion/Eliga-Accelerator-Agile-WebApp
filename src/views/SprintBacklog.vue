@@ -50,11 +50,20 @@
           <v-row class="py-1 px-5" v-for="item in taskInPB" :key="item.id" justify="center">
             <v-col>
             <v-card class="accent border-radius-50">
-              <v-col>
+              <v-container class="py-0">
+              <v-row>
+              <v-col cols="9" class="pr-0" align-self="center">
                 <v-card-text class="pa-0" large>
                   {{ item.content }}
                 </v-card-text>
               </v-col>
+              <v-col class="pr-0" align-self="center">
+                <v-btn rounded @click="deleteTask(item.id)">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </v-col>
+              </v-row>
+              </v-container>
             </v-card>
             </v-col>
             <v-col cols="2">
@@ -103,7 +112,7 @@ export default {
   methods: {
     ...mapActions("ProductBacklog", ["getPBInSprint2", "setCurrentPBID", "resetCurrentPBID", "setActivePB"]),
     ...mapActions("SprintBacklog", ["setCurrentSprintName"]),
-    ...mapActions("Task", ["getTaskInPB", "resetTaskInPB"]),
+    ...mapActions("Task", ["getTaskInPB", "resetTaskInPB", "removeTask"]),
     getThePB(sprint) {
       this.getPBInSprint2(sprint);
       this.setCurrentSprintName(sprint)
@@ -114,6 +123,9 @@ export default {
       this.setCurrentPBID(pb)
       this.getTaskInPB(pb)
       this.setActivePB(pb.id)
+    },
+    deleteTask(taskID) {
+      this.removeTask(taskID)
     }
   }
 };
