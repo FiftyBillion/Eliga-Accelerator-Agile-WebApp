@@ -34,7 +34,7 @@
                   <v-col cols="2" offset="1" :memberid="item.id" :membername="item.name">
                     <v-avatar :memberid="item.id" :membername="item.name">
                       <v-img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQDOaXs_L_jjci3OGgZO7qF3q6NgRR8gRwcRVw1qsJR7NtRIJ-c"
+                        :src="`https://picsum.photos/200?random=${item.id}`"
                         @dragover.stop
                       ></v-img>
                     </v-avatar>

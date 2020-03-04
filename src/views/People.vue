@@ -17,7 +17,7 @@
     </v-container>
     <v-container class="scroll">
       <v-row>
-        <v-col v-for="(person, index) in member" :key="index" cols="4">
+        <v-col v-for="person in member" :key="person.id" cols="4">
           <div class="border-card">
           <v-card class="mx-2 black">
             <v-row>
