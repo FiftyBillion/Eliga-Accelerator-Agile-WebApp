@@ -37,6 +37,7 @@
               <v-btn @click="removeMEMBER(person.id)" class="red darken-4">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
+              <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
           </div>
