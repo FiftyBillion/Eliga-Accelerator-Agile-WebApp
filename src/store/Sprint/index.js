@@ -33,6 +33,12 @@ export default {
     removeSprint: ({ commit }, sprint) => {
       commit('REMOVE_SPRINT', sprint)
       Axios.delete(`http://54.188.22.63/api/sprintbacklog/${sprint.id}/`)
+      Axios.get(`http://54.188.22.63/api/task/?sprintbacklogID=${sprint.id}`)
+      .then(Response => {
+        for(var i = 0; i < Response.data.length; i++) {
+          Axios.patch(`http://54.188.22.63/api/task/${Response.data[i].id}/`, {sprintbacklogID: 0})
+        }
+      })
     }
   }
 };

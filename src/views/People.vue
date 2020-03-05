@@ -34,7 +34,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn @click="removeMEMBER(person.id)" class="red darken-4">
+              <v-btn @click="removeM(person.id)" class="red darken-4">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
               <v-spacer></v-spacer>
@@ -50,6 +50,7 @@
 <script>
 import MemberPopup from "@/components/MemberPopup";
 import { mapState, mapActions } from "vuex";
+import Axios from 'axios'
 
 export default {
   name: "people",
@@ -61,8 +62,17 @@ export default {
   },
   methods: {
     ...mapActions("People", ["removeMEMBER"]),
-    removeMEMBER(personid) {
+    removeM(personid) {
       this.removeMEMBER(personid);
+      Axios.get(`http://54.188.22.63/api/task/?assignTo=${personid}`)
+      .then(Response => {
+        this.clearAssign(Response.data)
+      })
+    },
+    clearAssign(res) {
+      for(var i = 0; i < res.length; i++) {
+          Axios.patch(`http://54.188.22.63/api/task/${res[i].id}/`, {assignTo: 0, assignToName: "None"})
+        }
     }
   },
   mounted() {
