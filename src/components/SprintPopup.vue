@@ -20,6 +20,10 @@
               label="Name"
               v-model="name"
               class="pt-5"
+              required
+              :error-messages="nameErrors"
+              @input="$v.name.$touch()"
+              @blur="$v.name.$touch()"
             ></v-textarea>
             <v-row justify="space-around">
               <v-col cols="6">
@@ -77,6 +81,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import {required, minLength, maxLength} from 'vuelidate/lib/validators';
 export default {
   data() {
     return {
@@ -88,6 +93,13 @@ export default {
       duedate: new Date().toISOString().substr(0, 10)
     };
   },
+  validations:{
+    name:{
+        required,
+        minLength: minLength(3),
+        maxLength: maxLength(100)
+    }
+  },
   methods: {
       ...mapActions('Sprint', ['addSprint']),
       addS() {
@@ -97,6 +109,16 @@ export default {
           this.startdate = new Date().toISOString().substr(0, 10)
           this.duedate = new Date().toISOString().substr(0, 10)
           this.dialog = false
+      }
+  },
+  computed: {
+    nameErrors () {
+        const errors = []
+        if (!this.$v.name.$dirty) return errors
+        !this.$v.name.minLength && errors.push('Name must be at least 3 characters long')
+        !this.$v.name.maxLength && errors.push('Name must be at most 100 characters long')
+        !this.$v.name.required && errors.push('Name is required.')
+        return errors
       }
   }
 };

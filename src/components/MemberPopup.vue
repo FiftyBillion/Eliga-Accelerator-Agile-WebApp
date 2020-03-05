@@ -20,6 +20,9 @@
               label="Fullname"
               v-model="name"
               class="pt-5"
+              :error-messages="nameErrors"
+              @input="$v.name.$touch()"
+              @blur="$v.name.$touch()"
             ></v-textarea>
              <v-textarea
               prepend-icon="mdi-view-list"
@@ -30,6 +33,9 @@
               label="Role"
               v-model="role"
               class="pt-5"
+              :error-messages="roleErrors"
+              @input="$v.role.$touch()"
+              @blur="$v.role.$touch()"
             ></v-textarea>
      
 
@@ -45,12 +51,25 @@
 
 <script>
 import { mapActions } from 'vuex';
+import {required, minLength, maxLength} from 'vuelidate/lib/validators';
 export default {
   data() {
     return {
       dialog: false,
       name: '',
       role: ''
+    }
+  },
+  validations:{
+    name:{
+        required,
+        minLength: minLength(2),
+        maxLength: maxLength(50)
+    },
+    role:{
+        required,
+        minLength: minLength(2),
+        maxLength: maxLength(50)
     }
   },
   methods: {
@@ -62,6 +81,24 @@ export default {
           this.name = ''
           this.role = ''
       } 
+  },
+  computed: {
+    nameErrors () {
+        const errors = []
+        if (!this.$v.name.$dirty) return errors
+        !this.$v.name.minLength && errors.push('Name must be at least 2 characters long')
+        !this.$v.name.maxLength && errors.push('Name must be at most 50 characters long')
+        !this.$v.name.required && errors.push('Name is required.')
+        return errors
+      },
+      roleErrors () {
+        const errors = []
+        if (!this.$v.role.$dirty) return errors
+        !this.$v.role.minLength && errors.push('Role must be at least 2 characters long')
+        !this.$v.role.maxLength && errors.push('Role must be at most 50 characters long')
+        !this.$v.role.required && errors.push('Role is required.')
+        return errors
+      }
   }
 };
 </script>
