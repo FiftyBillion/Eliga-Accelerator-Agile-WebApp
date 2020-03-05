@@ -71,7 +71,6 @@ export default {
     return {
       drawer: true,
       links: [
-        { icon: "mdi-speedometer", text: "Dashboard", route: "/" },
         {
           icon: "mdi-checkbox-multiple-blank",
           text: "Product Backlog",
