@@ -18,8 +18,26 @@ export default {
         SET_DATA: (state, {dates, taskNumb}) => {
             Object.assign(state.data,{[state.startEnd[0]]: state.totalTask})
             Object.assign(state.data2,{[state.startEnd[0]]: state.totalTask})
+            var startdate = new Date(state.startEnd[0])
+            var enddate = new Date(state.startEnd[1])
+            var totalDays = (enddate.getTime() - startdate.getTime()) / (1000*3600*24)
+            var taskeachday = state.totalTask / totalDays
+            var nowTask = state.totalTask
+            console.log(taskeachday)
             for(var i = 0; i < dates.length; i++) {
                 Object.assign(state.data, {[dates[i]]: taskNumb[i]})
+                if(i == 0) {
+                    var d2 = new Date(dates[0])
+                    var days = (d2.getTime() - startdate.getTime())/ (1000*3600*24)
+                    Object.assign(state.data2, {[dates[0]]: nowTask - (days * taskeachday)})
+                    nowTask -= days * taskeachday
+                } else {
+                    var dd2 = new Date(dates[i])
+                    var dd1 = new Date(dates[i-1])
+                    var ddays = (dd2.getTime() - dd1.getTime())/(1000*3600*24)
+                    Object.assign(state.data2, {[dates[i]]: nowTask - (ddays * taskeachday)})
+                    nowTask -= ddays * taskeachday
+                }
             }
             Object.assign(state.data2,{[state.startEnd[1]]: 0})
             Object.assign(state.chart, {name: "Actual Tasks", data: state.data})

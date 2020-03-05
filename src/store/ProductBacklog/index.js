@@ -49,6 +49,12 @@ export default {
     removePB: ({ commit }, pb) => {
       commit("REMOVE_PB", pb);
       Axios.delete(`http://54.188.22.63/api/productbacklog/${pb.id}/`)
+      Axios.get(`http://54.188.22.63/api/task/?productbacklogID=${pb.id}`)
+      .then(Response => {
+        for(var i = 0; i < Response.data.length; i++) {
+          Axios.delete(`http://54.188.22.63/api/task/${Response.data[i].id}/`)
+        }
+      })
     },
     getPB: ({ commit }) => {
       Axios.get('http://54.188.22.63/api/productbacklog/')

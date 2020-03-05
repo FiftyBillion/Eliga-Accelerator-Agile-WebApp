@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Dashboard from '../views/Dashboard'
 import ProductBacklog from '../views/ProductBacklog'
 import SprintBacklog from '../views/SprintBacklog'
 import SprintPlanning from '../views/SprintPlanning'
@@ -18,12 +17,6 @@ import TaskReview from '../components/TaskReview'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'dashboard',
-    component: Dashboard,
-    meta: { requiresAuth: true}
-  },
   {
     path: '/productbacklog',
     name: 'productbacklog',

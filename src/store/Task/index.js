@@ -31,6 +31,14 @@ export default {
     SET_DATE_COMPLETED: (state, task) => {
       var index = state.task.findIndex(p => p.id == task.id);
       Vue.set(state.task, index, task)
+    },
+    REMOVE_TASK: (state, taskid) => {
+      var index = state.taskInPB.findIndex(p => p.id == taskid);
+      state.taskInPB.splice(index, 1);
+    },
+    REMOVE_TASK_REVIEW: (state, taskid) => {
+      var index = state.task.findIndex(p => p.id == taskid);
+      state.task.splice(index, 1);
     }
   },
   actions: {
@@ -74,6 +82,14 @@ export default {
       }).then(Response => {
         commit("SET_DATE_COMPLETED", Response.data);
       });
+    },
+    removeTask: ({ commit }, taskid) => {
+      Axios.delete(`http://54.188.22.63/api/task/${taskid}/`)
+      commit("REMOVE_TASK", taskid)
+    },
+    removeTaskReview: ({ commit }, taskid) => {
+      Axios.delete(`http://54.188.22.63/api/task/${taskid}/`)
+      commit("REMOVE_TASK_REVIEW", taskid)
     }
   }
 };

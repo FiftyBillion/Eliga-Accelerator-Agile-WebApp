@@ -1,26 +1,31 @@
 <template>
   <div>
     <v-row>
-      <v-col offset="2" cols="3">
+      <v-col offset="1" cols="4" class="pl-10">
         <span>Content</span>
       </v-col>
-      <v-col cols="2">
+      <v-col cols="2" class="pl-10 ml-8">
         <span>Assign To</span>
       </v-col>
-      <v-col cols="1" class="pl-0">
+      <v-col cols="1" class="pl-2">
         <span>Hours</span>
       </v-col>
       <v-col cols="1">
         <span>Status</span>
       </v-col>
-      <v-col cols="2" class="ml-10 pl-10">
+      <v-col cols="2" class="ml-3 pl-10">
         <span>Date Completed</span>
       </v-col>
     </v-row>
     <v-divider class="secondary darken-4"></v-divider>
     <v-container class="scroll">
       <v-row v-for="item in task" :key="item.id">
-        <v-col>
+        <v-col cols="1" align-self="center" class="px-0">
+          <v-btn rounded class="red darken-4" @click="deleteTask(item.id)">
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col class="pl-0">
           <v-card>
             <v-row>
               <v-col cols="5">
@@ -48,7 +53,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import DateCompletedPopup from "../components/DateCompletedPopup";
 export default {
   computed: {
@@ -59,6 +64,12 @@ export default {
   },
   components: {
     DateCompletedPopup
+  },
+  methods: {
+    ...mapActions("Task", ["removeTaskReview"]),
+    deleteTask(taskid) {
+      this.removeTaskReview(taskid)
+    }
   }
 };
 </script>
