@@ -5,7 +5,9 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import Chartkick from 'vue-chartkick'
 import Chart from 'chart.js'
+import Vuelidate from 'vuelidate'
 
+Vue.use(Vuelidate)
 Vue.use(Chartkick.use(Chart))
 Vue.config.productionTip = false
 
