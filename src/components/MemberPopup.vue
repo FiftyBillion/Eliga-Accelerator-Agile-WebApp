@@ -75,12 +75,25 @@ export default {
   methods: {
       ...mapActions('People', ['addMEMBER']),
       addMember() {
+        this.$v.$touch()
+        if(this.$v.$invalid){
+          console.log("Submission Fail")    
+        }else{
           var member = {name: this.name, role: this.role}
           this.addMEMBER(member)
           this.dialog = false
           this.name = ''
           this.role = ''
+        }
       } 
+  },
+  watch: {
+    //if dialog change, this will run
+    dialog() {
+      if(this.dialog == false) {
+        this.$v.$reset()
+      }
+    }
   },
   computed: {
     nameErrors () {

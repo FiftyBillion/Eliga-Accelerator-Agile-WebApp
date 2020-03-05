@@ -20,7 +20,9 @@ export default {
   actions: {
     addMEMBER: ({ commit }, item) => {
       Axios.post('http://54.188.22.63/api/user/', item)
-      commit("ADD_MEMBER", item);
+      .then(Response => {
+        commit("ADD_MEMBER", Response.data);
+      })
     },
     removeMEMBER: ({ commit }, personID) => {
       Axios.delete(`http://54.188.22.63/api/user/${personID}/`)

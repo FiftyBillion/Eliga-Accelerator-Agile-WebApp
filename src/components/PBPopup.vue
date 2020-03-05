@@ -66,6 +66,7 @@ import {required, minLength, maxLength, between} from 'vuelidate/lib/validators'
 export default {
   data() {
     return {
+      //when the popup is open, it change it to true, when close, it change it to false
       dialog: false,
       content: "",
       priority: "",
@@ -87,6 +88,14 @@ export default {
         required,
         between: between(0,1000)
       }
+  },
+  watch: {
+    //if dialog change, this will run
+    dialog() {
+      if(this.dialog == false) {
+        this.$v.$reset()
+      }
+    }
   },
   computed:{
     contentErrors () {

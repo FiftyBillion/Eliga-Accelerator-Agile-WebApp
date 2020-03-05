@@ -68,6 +68,14 @@ export default {
         between: between(0,1000)
       }
   },
+  watch: {
+    //if dialog change, this will run
+    dialog() {
+      if(this.dialog == false) {
+        this.$v.$reset()
+      }
+    }
+  },
   computed: {
     ...mapState('SprintBacklog', ['currentSprintID']),
     ...mapState('ProductBacklog', ['currentPBID']),

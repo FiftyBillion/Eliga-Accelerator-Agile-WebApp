@@ -103,13 +103,26 @@ export default {
   methods: {
       ...mapActions('Sprint', ['addSprint']),
       addS() {
+        this.$v.$touch()
+        if(this.$v.$invalid){
+          console.log("Submission Fail")    
+        }else{
           var sprint = { startDate: this.startdate, dueDate: this.duedate, name: this.name}
           this.addSprint(sprint)
           this.name = '',
           this.startdate = new Date().toISOString().substr(0, 10)
           this.duedate = new Date().toISOString().substr(0, 10)
           this.dialog = false
+        }
       }
+  },
+  watch: {
+    //if dialog change, this will run
+    dialog() {
+      if(this.dialog == false) {
+        this.$v.$reset()
+      }
+    }
   },
   computed: {
     nameErrors () {
