@@ -79,7 +79,7 @@ export default {
       content:{
         required,
         minLength: minLength(3),
-        maxLength: maxLength(100)
+        maxLength: maxLength(500)
       },
       priority:{
         required,
@@ -102,7 +102,7 @@ export default {
         const errors = []
         if (!this.$v.content.$dirty) return errors
         !this.$v.content.minLength && errors.push('Content must be at least 3 characters long')
-        !this.$v.content.maxLength && errors.push('Content must be at most 100 characters long')
+        !this.$v.content.maxLength && errors.push('Content must be at most 500 characters long')
         !this.$v.content.required && errors.push('Content is required.')
         return errors
       },
